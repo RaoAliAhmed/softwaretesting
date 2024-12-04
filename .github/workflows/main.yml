@@ -62,6 +62,6 @@ jobs:
           cp -r mysql-connector-j-9.0.0/*.jar lib/
           curl -O https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.8.2/junit-platform-console-standalone-1.8.2.jar
           mv junit-platform-console-standalone-1.8.2.jar lib/
-          javac -cp "lib/*" -d out src/LoginApp.java src/LoginAppTest.java
+          javac -cp "lib/*" -d out src/LoginApp.java src/LoginTest.java
           export DISPLAY=:99
-          java -cp "lib/*:out" org.junit.platform.console.ConsoleLauncher --class-path out --select-class LoginAppTest
+          java -cp "lib/*:out" org.junit.platform.console.ConsoleLauncher --class-path out --select-class LoginTest
