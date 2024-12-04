@@ -46,7 +46,7 @@ public class LoginApp extends JFrame {
             String email = emailField.getText();
             String password = new String(passwordField.getPassword()); // Password is ignored for validation
 
-            String userName = authenticateUser(email);
+            String userName = authenticateUser(email,password);
             if (userName != null) {
                 JOptionPane.showMessageDialog(null, "Welcome, " + userName + "!", "Login Successful", JOptionPane.INFORMATION_MESSAGE);
             } else {
@@ -55,12 +55,13 @@ public class LoginApp extends JFrame {
         }
     }
 
-    public String authenticateUser(String email) {
+    public String authenticateUser(String email, String password) {
         String userName = null;
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
-            String query = "SELECT name FROM User WHERE Email = ?";
+            String query = "SELECT name FROM User WHERE Email = ? and Password = ?";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, email);
+			stmt.setString(2, password);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
